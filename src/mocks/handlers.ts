@@ -17,10 +17,15 @@ export const handlers = [
 
 		return HttpResponse.json(data)
 	}),
-	http.post('/api/weather', () => {
 
-		console.log('Captured a "POST /posts" request')
+	http.post('/api/weather', async ({ request }) => {
+		const newNote = await request.json()
+		data.push(newNote as WeatherNote)
+		return new HttpResponse('Successfully added', {
+			status: 201
+		})
 	}),
+
 	http.delete('/api/weather/:id', ({ params }) => {
 		const id = params.id as string
 		data = data.filter(note => note.id !== parseInt(id))
@@ -28,10 +33,12 @@ export const handlers = [
 			status: 202
 		})
 	}),
+
 	http.get('/api/owners', () => {
 
 		console.log('Captured a "GET /owners" request')
 	}),
+
 	http.get('/api/weather_type', () => {
 
 		console.log('Captured a "GET /weather_type" request')

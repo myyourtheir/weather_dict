@@ -11,13 +11,14 @@ function Table() {
 		<DataTable
 			value={data}
 			tableStyle={{ minWidth: '50rem' }}
+			showGridlines
 		>
 			<Column field="date" header="Date"></Column>
 			<Column field="temperature" header="Temperature"></Column>
 			<Column field="weather" header="Weather"></Column>
 			<Column field="owner" header="Owner"></Column>
 			<Column field="comment" header="Comment"></Column>
-			<Column field="" header="Del" body={(rowData: WeatherNote) => <DeleteButton rowData={rowData} />}></Column>
+			<Column field="" header="" body={(rowData: WeatherNote) => <DeleteButton rowData={rowData} />}></Column>
 		</DataTable>
 	)
 }

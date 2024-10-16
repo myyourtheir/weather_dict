@@ -11,7 +11,7 @@ function DeleteButton({ rowData }: DeleteButtonProps) {
 	return (
 		<Button
 			onClick={e => deleteNote({ id: rowData.id })}>
-			Удалить
+			Remove
 		</Button>
 	)
 }

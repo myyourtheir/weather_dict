@@ -19,6 +19,15 @@ export const weatherApi = createApi({
 			providesTags: ['WeatherNotes']
 		}),
 
+		addWeatherNorte: build.mutation<WeatherNote, { newWeatherNote: WeatherNote }>({
+			query: ({ newWeatherNote }) => ({
+				url: `weather`,
+				method: 'POST',
+				body: newWeatherNote
+			}),
+			invalidatesTags: ['WeatherNotes']
+		}),
+
 		deleteWeatherNote: build.mutation({
 			query: ({ id }) => ({
 				url: `weather/${id}`,
@@ -32,4 +41,4 @@ export const weatherApi = createApi({
 
 
 
-export const { useGetWeatherNotesQuery, useDeleteWeatherNoteMutation } = weatherApi
+export const { useGetWeatherNotesQuery, useDeleteWeatherNoteMutation, useAddWeatherNorteMutation } = weatherApi
