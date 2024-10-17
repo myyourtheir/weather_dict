@@ -1,25 +1,33 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { WeatherNote } from '../types'
+import { Owners, Weather, WeatherNote } from '../types'
 
 
 export const weatherApi = createApi({
 	reducerPath: 'weatherApi',
 	baseQuery: fetchBaseQuery({ baseUrl: '/api/' }),
-	tagTypes: ['WeatherNotes'],
+	tagTypes: ['WeatherNotes', 'Owners', 'weatherTypes'],
 	endpoints: (build) => ({
 		getWeatherNotes: build.query<WeatherNote[], void>({
 			query: () => `weather`,
 			transformResponse: (res: WeatherNote[]) => {
 				res.forEach(note => {
 					note.comment = note.comment ? note.comment : '-'
-					note.date = new Date(parseInt(note.date)).toLocaleString()
 				})
 				return res
 			},
 			providesTags: ['WeatherNotes']
 		}),
 
-		addWeatherNorte: build.mutation<WeatherNote, { newWeatherNote: WeatherNote }>({
+		getOwners: build.query<Owners[], void>({
+			query: () => `owners`,
+			providesTags: ['Owners']
+		}),
+		getWeatherTypes: build.query<Weather[], void>({
+			query: () => `weather_type`,
+			providesTags: ['weatherTypes']
+		}),
+
+		addWeatherNote: build.mutation<WeatherNote, { newWeatherNote: WeatherNote }>({
 			query: ({ newWeatherNote }) => ({
 				url: `weather`,
 				method: 'POST',
@@ -41,4 +49,4 @@ export const weatherApi = createApi({
 
 
 
-export const { useGetWeatherNotesQuery, useDeleteWeatherNoteMutation, useAddWeatherNorteMutation } = weatherApi
+export const { useGetWeatherNotesQuery, useDeleteWeatherNoteMutation, useAddWeatherNoteMutation, useGetOwnersQuery, useGetWeatherTypesQuery } = weatherApi

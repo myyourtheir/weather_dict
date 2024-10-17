@@ -1,21 +1,27 @@
 import { http, HttpResponse } from 'msw'
-import { WeatherNote } from '../types'
+import { Owners, Weather, WeatherNote } from '../types'
 let data: WeatherNote[] = [
 	{
 		id: 1676800000,
-		date: '1676800000',
+		date: new Date(),
 		temperature: 20,
 		comment: '',
-		owner: 'vasya',
+		owner: 'John',
 		weather: 'Cloudy'
 	}
 ]
+const owners: Owners[] = [
+	'John', 'Mike', 'Tom', 'Oleg'
+]
 
+const weatherTypes: Weather[] = [
+	'Sunny', 'Cloudy', 'Rainy', 'Snowy'
+]
 
 export const handlers = [
 	http.get('/api/weather', () => {
 
-		return HttpResponse.json(data)
+		return HttpResponse.json(data, { status: 200 })
 	}),
 
 	http.post('/api/weather', async ({ request }) => {
@@ -35,12 +41,10 @@ export const handlers = [
 	}),
 
 	http.get('/api/owners', () => {
-
-		console.log('Captured a "GET /owners" request')
+		return HttpResponse.json(owners, { status: 200 })
 	}),
 
 	http.get('/api/weather_type', () => {
-
-		console.log('Captured a "GET /weather_type" request')
+		return HttpResponse.json(weatherTypes, { status: 200 })
 	}),
 ]

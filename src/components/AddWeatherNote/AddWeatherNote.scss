@@ -1,0 +1,15 @@
+.dialog {
+	form {
+		display: flex;
+		flex-direction: column;
+		row-gap: 1.5rem;
+		margin-top: 1.5rem;
+	}
+}
+
+.add-weather-note-button {
+	width: 100%;
+	display: flex;
+	justify-content: end;
+	align-items: center;
+}

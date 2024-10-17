@@ -1,12 +1,20 @@
 import AddWeatherNoteButton from './components/AddWeatherNote'
 import Table from './components/Table'
-import "primereact/resources/themes/lara-light-indigo/theme.css"
+import './index.scss'
+import 'primereact/resources/themes/saga-blue/theme.css'
+
+
 function App() {
 	return (
-		<div className="App">
-			<AddWeatherNoteButton />
-			<Table />
-		</div>
+		<main className="App">
+			<div className='container'>
+				<h3>
+					Weather Notes Table
+				</h3>
+				<Table />
+				<AddWeatherNoteButton />
+			</div>
+		</main>
 	)
 }
 
